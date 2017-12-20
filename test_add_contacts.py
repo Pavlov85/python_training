@@ -36,7 +36,7 @@ class test_add_contacts(unittest.TestCase):
         wd.find_element_by_name("theform").click()
         wd.find_element_by_name("firstname").click()
         wd.find_element_by_name("firstname").clear()
-        wd.find_element_by_name("firstname").send_keys(contact.firsrname)
+        wd.find_element_by_name("firstname").send_keys(contact.firstname)
         wd.find_element_by_name("middlename").click()
         wd.find_element_by_name("middlename").clear()
         wd.find_element_by_name("middlename").send_keys(contact.middlename)
@@ -102,6 +102,9 @@ class test_add_contacts(unittest.TestCase):
         # submit new contact
         wd.find_element_by_name("submit").click()
 
+    def return_to_home_page(self, wd):
+        wd.find_element_by_link_text("home page").click()
+
     def logout(self, wd):
         # logout
         wd.find_element_by_link_text("Logout").click()
@@ -110,10 +113,11 @@ class test_add_contacts(unittest.TestCase):
         wd = self.wd
         self.open_home_page(wd)
         self.login(wd, username="admin", password="secret")
-        self.create_contact(wd, Contact(firstrname="qqqqqqqq", middlename="wwwwwww", nickname="eeefdeeee", title="vvvvvvvvvv", lastname="eeeeeeeee", company="xccccccccc",
+        self.create_contact(wd, Contact(firstname="qqqqqqqq", middlename="wwwwwww", nickname="eeefdeeee", title="vvvvvvvvvv", lastname="eeeeeeeee", company="xccccccccc",
                             adress="ffcvcxvcvcxvxcvx", home="23144124214", mobile="45565656678", work="56678678678", fax="67867868686",
                             email="wap@mail.ru", email2="trest@mail.ru", email3="big@mail.ru", homepage="http://wwwww.ru", byear="1985", ayear="2000",
                             adress2="sdfdsfsdfsdfsd", phone2="sdfsdfsdfsdfsdf", notes="sfsdfsdfdssdfsdfs"))
+        self.return_to_home_page(wd)
         self.logout(wd)
 
     def tearDown(self):
