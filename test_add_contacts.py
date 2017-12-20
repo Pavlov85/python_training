@@ -110,7 +110,7 @@ class test_add_contacts(unittest.TestCase):
         wd = self.wd
         self.open_home_page(wd)
         self.login(wd, username="admin", password="secret")
-        self.create_contact(wd, Contact(firsrname="qqqqqqqq", middlename="wwwwwww", nickname="eeefdeeee", title="vvvvvvvvvv", lastname="eeeeeeeee", company="xccccccccc",
+        self.create_contact(wd, Contact(firstrname="qqqqqqqq", middlename="wwwwwww", nickname="eeefdeeee", title="vvvvvvvvvv", lastname="eeeeeeeee", company="xccccccccc",
                             adress="ffcvcxvcvcxvxcvx", home="23144124214", mobile="45565656678", work="56678678678", fax="67867868686",
                             email="wap@mail.ru", email2="trest@mail.ru", email3="big@mail.ru", homepage="http://wwwww.ru", byear="1985", ayear="2000",
                             adress2="sdfdsfsdfsdfsd", phone2="sdfsdfsdfsdfsdf", notes="sfsdfsdfdssdfsdfs"))
