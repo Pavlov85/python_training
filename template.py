@@ -15,6 +15,7 @@ class Template:
     def login(self, username, password):
         # Login
         wd = self.wd
+        self.open_home_page()
         wd.find_element_by_name("user").click()
         wd.find_element_by_name("user").clear()
         wd.find_element_by_name("user").send_keys(username)
@@ -96,6 +97,7 @@ class Template:
         wd.find_element_by_name("notes").send_keys(contact.notes)
         # submit new contact
         wd.find_element_by_name("submit").click()
+        self.return_to_home_page()
 
     def return_to_home_page(self):
         wd = self.wd
