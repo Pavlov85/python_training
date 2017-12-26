@@ -3,12 +3,12 @@
 
 class ContactHelper:
 
-    def __init__(self, tmp):
-        self.tmp = tmp
+    def __init__(self, app):
+        self.app = app
 
     def create(self, contact):
         # create new
-        wd = self.tmp.wd
+        wd = self.app.wd
         wd.find_element_by_link_text("add new").click()
         # fill all fields
         wd.find_element_by_name("theform").click()
@@ -82,5 +82,5 @@ class ContactHelper:
         self.return_to_home_page()
 
     def return_to_home_page(self):
-        wd = self.tmp.wd
+        wd = self.app.wd
         wd.find_element_by_link_text("home page").click()
