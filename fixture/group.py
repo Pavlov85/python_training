@@ -28,7 +28,7 @@ class GroupHelper:
         wd.find_element_by_name("submit").click()
         self.return_to_group_page()
 
-    def edit_group(self, group):
+    def edit(self, group):
         wd = self.app.wd
         self.open_groups_page()
         # Выбираем первую группу
