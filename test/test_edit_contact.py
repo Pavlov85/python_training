@@ -10,7 +10,10 @@ def test_edit_contact(app):
                                    email="wap@mail.ru", email2="trest@mail.ru", email3="big@mail.ru",
                                    homepage="http://wwwww.ru", byear="1985", ayear="2000",
                                    address2="sdfdsfsdfsdfsd", phone2="sdfsdfsdfsdfsdf", notes="sfsdfsdfdssdfsdfs"))
+    old_contacts = app.contact.get_contact_list()
     app.contact.edit(Contact(firstname="a", middlename="b", nickname="c", title="d", lastname="e", company="f",
                                adress="g", home="1", mobile="2", work="3", fax="4",
                                email="wapxl@mail.ru", email2="best@mail.ru", email3="123@mail.ru", homepage="http://test.ru", byear="1986", ayear="2017",
                                address2="as", phone2="df", notes="fg"))
+    new_contacts = app.contact.get_contact_list()
+    assert len(old_contacts) == len(new_contacts)
