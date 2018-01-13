@@ -86,6 +86,7 @@ class ContactHelper:
         # submit new contact
         wd.find_element_by_name("submit").click()
         self.return_to_home_page()
+        self.contact_cache = None
 
     def edit(self, contact):
         wd = self.app.wd
@@ -164,6 +165,7 @@ class ContactHelper:
         # Подтверждаем изменения
         wd.find_element_by_name("update").click()
         self.return_to_home_page()
+        self.contact_cache = None
 
     def delete_first_contact(self):
         wd = self.app.wd
@@ -177,6 +179,7 @@ class ContactHelper:
         wd.switch_to_alert().accept()
         # Переходим на страницу с контактами
         wd.find_element_by_link_text("home").click()
+        self.contact_cache = None
 
 
     def return_to_home_page(self):
@@ -188,13 +191,16 @@ class ContactHelper:
         self.open_contact_page()
         return len(wd.find_elements_by_name("selected[]"))
 
+    contact_cache = None
+
     def get_contact_list(self):
-        wd = self.app.wd
-        self.open_contact_page()
-        contacts = []
-        for element in wd.find_elements_by_name("entry"):
-            last_name = element.find_element_by_xpath("td[2]").text
-            first_name = element.find_element_by_xpath("td[3]").text
-            id = element.find_element_by_name("selected[]").get_attribute("value")
-            contacts.append(Contact(firstname=first_name, lastname=last_name, id=id))
-        return contacts
+        if self.contact_cache is None:
+            wd = self.app.wd
+            self.open_contact_page()
+            self.contact_cache = []
+            for element in wd.find_elements_by_name("entry"):
+                last_name = element.find_element_by_xpath("td[2]").text
+                first_name = element.find_element_by_xpath("td[3]").text
+                id = element.find_element_by_name("selected[]").get_attribute("value")
+                self.contact_cache.append(Contact(firstname=first_name, lastname=last_name, id=id))
+        return list(self.contact_cache)
