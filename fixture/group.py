@@ -31,11 +31,13 @@ class GroupHelper:
         self.return_to_group_page()
         self.group_cache = None
 
-    def edit(self, group):
+    def edit_first_group(self):
+        self.edit_group_by_index(0)
+
+    def edit_group_by_index(self, group, index):
         wd = self.app.wd
         self.open_groups_page()
-        # Выбираем первую группу
-        wd.find_element_by_name("selected[]").click()
+        self.select_group_by_index(index)
         # Редактируем группу
         wd.find_element_by_name("edit").click()
         # Заполняем поля группы
@@ -53,11 +55,23 @@ class GroupHelper:
         self.return_to_group_page()
         self.group_cache = None
 
-    def delete_first_group(self):
+    def select_first_group(self):
         wd = self.app.wd
-        self.open_groups_page()
         # Выбираем первую группу
         wd.find_element_by_name("selected[]").click()
+
+    def select_group_by_index(self, index):
+        wd = self.app.wd
+        # Выбираем первую группу
+        wd.find_elements_by_name("selected[]")[index].click()
+
+    def delete_first_group(self):
+        self.delete_group_by_index(0)
+
+    def delete_group_by_index(self, index):
+        wd = self.app.wd
+        self.open_groups_page()
+        self.select_group_by_index(index)
         # Удаляем первую группу
         wd.find_element_by_name("delete").click()
         self.return_to_group_page()
