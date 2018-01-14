@@ -88,14 +88,17 @@ class ContactHelper:
         self.return_to_home_page()
         self.contact_cache = None
 
-    def edit(self, contact):
+    def edit_first_contact(self):
+        self.edit_contact_by_index(0)
+
+    def edit_contact_by_index(self, contact, index):
         wd = self.app.wd
         # Открываем страницу с контактами
         self.open_contact_page()
-        # Выбираем первый контакт
-        wd.find_element_by_name("selected[]").click()
+        # Выбираем рандомный контакт
+        self.select_contact_by_index(index)
         # Редактируем контакт
-        wd.find_element_by_xpath("//table[@id='maintable']/tbody/tr[2]/td[8]/a/img").click()
+        wd.find_elements_by_xpath("//img[@alt='Edit']")[index].click()
         # Обновляем поля
         wd.find_element_by_name("firstname").click()
         wd.find_element_by_name("firstname").clear()
@@ -167,12 +170,23 @@ class ContactHelper:
         self.return_to_home_page()
         self.contact_cache = None
 
+    def select_first_contact(self):
+        wd = self.app.wd
+        wd.find_element_by_name("selected[]").click()
+
+    def select_contact_by_index(self, index):
+        wd = self.app.wd
+        wd.find_elements_by_name("selected[]")[index].click()
+
     def delete_first_contact(self):
+        self.delete_contact_by_index(0)
+
+    def delete_contact_by_index(self, index):
         wd = self.app.wd
         # Открываем страницу с контактами
         self.open_contact_page()
-        # Выбираем первый контакт
-        wd.find_element_by_name("selected[]").click()
+        # Выбираем рандомный контакт
+        self.select_contact_by_index(index)
         # Удаляем первый контакт
         wd.find_element_by_xpath("//div[@id='content']/form[2]/div[2]/input").click()
         # Подтверждаем поп-ап
@@ -180,7 +194,6 @@ class ContactHelper:
         # Переходим на страницу с контактами
         wd.find_element_by_link_text("home").click()
         self.contact_cache = None
-
 
     def return_to_home_page(self):
         wd = self.app.wd
