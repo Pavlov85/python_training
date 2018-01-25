@@ -217,12 +217,12 @@ class ContactHelper:
                 lastname = cells[1].text
                 address = cells[3].text
                 id = cells[0].find_element_by_tag_name("input").get_attribute("value")
-                all_emails = cells[4].text.splitlines()
+                all_emails = cells[4].text
                 all_phones = cells[5].text.splitlines()
                 self.contact_cache.append(Contact(firstname=firstname, lastname=lastname, id=id, adress=address,
+                                                  all_emails_from_home_page=all_emails,
                                                   home=all_phones[0], mobile=all_phones[1],
-                                                  work=all_phones[2], phone2=all_phones[3],
-                                                  email=all_emails[0], email2=all_emails[1], email3=all_emails[2]))
+                                                  work=all_phones[2], phone2=all_phones[3]))
         return list(self.contact_cache)
 
     def open_contact_to_edit_by_index(self, index):
