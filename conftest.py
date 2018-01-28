@@ -8,7 +8,7 @@ def app(request):
     global fixture
     browser = request.config.getoption("--browser")
     base_url = request.config.getoption("--baseUrl")
-    # Если фикстуры нет, то инициализируем новую
+    # Если фикстуры нет, то инициализируем новую.
     if fixture is None:
         fixture = Application(browser=browser, base_url=base_url)
     else:
