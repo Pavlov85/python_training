@@ -178,6 +178,10 @@ class ContactHelper:
         wd = self.app.wd
         wd.find_elements_by_name("selected[]")[index].click()
 
+    def select_contact_by_id(self, id):
+        wd = self.app.wd
+        wd.find_element_by_id("%s" % id).click()
+
     def delete_first_contact(self):
         self.delete_contact_by_index(0)
 
@@ -188,6 +192,20 @@ class ContactHelper:
         # Выбираем рандомный контакт
         self.select_contact_by_index(index)
         # Удаляем первый контакт
+        wd.find_element_by_xpath("//div[@id='content']/form[2]/div[2]/input").click()
+        # Подтверждаем поп-ап
+        wd.switch_to_alert().accept()
+        # Переходим на страницу с контактами
+        wd.find_element_by_link_text("home").click()
+        self.contact_cache = None
+
+    def delete_contact_by_id(self, id):
+        wd = self.app.wd
+        # Открываем страницу с контактами
+        self.open_contact_page()
+        # Выбираем  контакт по id
+        self.select_contact_by_id(id)
+        # Удаляем  контакт
         wd.find_element_by_xpath("//div[@id='content']/form[2]/div[2]/input").click()
         # Подтверждаем поп-ап
         wd.switch_to_alert().accept()
